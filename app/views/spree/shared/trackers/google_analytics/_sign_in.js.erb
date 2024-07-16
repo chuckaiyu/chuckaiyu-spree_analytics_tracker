@@ -1,0 +1,10 @@
+<% if ga_enabled? %>
+  <script>
+    document.addEventListener('turbo:load', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'sign_in', {
+        });
+      };
+    });
+  </script>
+<% end %>

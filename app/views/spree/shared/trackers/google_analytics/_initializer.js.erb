@@ -1,0 +1,25 @@
+<% if ga_enabled? %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ga_tracker.analytics_id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '<%= ga_tracker.analytics_id %>', { 'send_page_view': false });
+    gtag('set', 'allow_google_signals', true )
+    gtag('set', 'allow_ad_personalization_signals', true );
+
+    function clearGAplugins() {
+      if (typeof ga !== "undefined" && typeof ga.getAll === "function") {
+        var trackingDom = ga.getAll()[0].get('trackingId');
+        if (trackingDom !== undefined) {
+          var trackingId = trackingDom.split('-').join('_')
+          if (trackingId !== undefined && ga.o !== undefined && ga.o["gtag_" + trackingId] !== undefined) {
+            delete ga.o["gtag_" + trackingId].plugins_
+          }
+        }
+      }
+    }
+  </script>
+<% end %>

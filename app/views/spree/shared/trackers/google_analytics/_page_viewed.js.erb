@@ -1,0 +1,18 @@
+<% if ga_enabled? %>
+  <script>
+    window.addEventListener('turbo:load', function(event) {
+      if (typeof gtag !== 'undefined') {
+        <% if user_id = try_spree_current_user.try(:id) %>
+          gtag('set', {
+            'user_id': '<%= user_id %>'
+          });
+        <% end %>
+        gtag('event', 'page_view', {
+          page_location: event.detail.url,
+          page_path: window.location.pathname,
+          page_title: window.document.title
+        });
+      }
+    });
+  </script>
+<% end %>
