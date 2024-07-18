@@ -1,13 +1,16 @@
 <% if ga_enabled? && @product.present? %>
   <script>
-    window.addEventListener('turbo:load', function() {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'view_item', {
-          items: [
-            <%= product_for_google(@product) %>,
-          ],
-        });
-      }
-    });
+    var host = window.location.hostname;
+    if (host != "localhost" && host != "127.0.0.1" && host != "lvh.me") {
+      window.addEventListener('turbo:load', function() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'view_item', {
+            items: [
+              <%= product_for_google(@product) %>,
+            ],
+          });
+        }
+      });
+    }
   </script>
 <% end %>

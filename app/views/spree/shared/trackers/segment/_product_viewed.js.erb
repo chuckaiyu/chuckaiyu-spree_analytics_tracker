@@ -1,12 +1,15 @@
 <% if segment_enabled? && @product.present? %>
   <script>
-    window.addEventListener('turbo:load', function() {
-      if (typeof analytics !== 'undefined') {
-        var segmentProductViewed = <%= product_for_segment(@product, image: default_image_for_product_or_variant(@product)) %>;
+    var host = window.location.hostname;
+    if (host != "localhost" && host != "127.0.0.1" && host != "lvh.me") {
+      window.addEventListener('turbo:load', function() {
+        if (typeof analytics !== 'undefined') {
+          var segmentProductViewed = <%= product_for_segment(@product, image: default_image_for_product_or_variant(@product)) %>;
 
-        analytics.page('Product Viewed', segmentProductViewed);
-        analytics.track('Product Viewed', segmentProductViewed);
-      }
-    });
+          analytics.page('Product Viewed', segmentProductViewed);
+          analytics.track('Product Viewed', segmentProductViewed);
+        }
+      });
+    }
   </script>
 <% end %>

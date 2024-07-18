@@ -1,10 +1,13 @@
 <% if ga_enabled? %>
   <script>
-    document.addEventListener('turbo:load', function() {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'sign_up', {
-        });
-      };
-    });
+    var host = window.location.hostname;
+    if (host != "localhost" && host != "127.0.0.1" && host != "lvh.me") {
+      document.addEventListener('turbo:load', function() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'sign_up', {
+          });
+        };
+      });
+    }
   </script>
 <% end %>

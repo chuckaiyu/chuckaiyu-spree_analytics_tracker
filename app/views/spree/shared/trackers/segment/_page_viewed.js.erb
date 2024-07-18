@@ -1,7 +1,10 @@
 <% if segment_enabled? %>
   <script>
-    if (typeof analytics !== 'undefined') {
-      analytics.page();
+    var host = window.location.hostname;
+    if (host != "localhost" && host != "127.0.0.1" && host != "lvh.me") {
+      if (typeof analytics !== 'undefined') {
+        analytics.page();
+      }
     }
   </script>
 <% end %>
